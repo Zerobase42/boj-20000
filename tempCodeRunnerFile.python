@@ -1,2 +1,45 @@
-s="be48e3a6f383a57510d6e71de41bd51cae7a93f1f3109ace48c461d4c28a7755ae762890ee861c647442aa0e358a099a0996607146b2fbeeffffffffffffffff85a0fc5a8d30d44a0f9eec21098e22bcbcd99cb27a5b4615a45280002ed6737e13dfb5e26d213242d97d19dedc51b5e97378352e123d69b0d77345a62fa53ca22c8da9ea83201a549d0090ddbc64208d00000000000000004bb44e2d5a29d67cb1ea8f9251d735681d9b87a2519e29db4cbf14557b5321214a79ffbe9602e1df3eea87c70944db0228b54f65f66a2fcb45ca5991a1de9a9291883da916a0d837d06f89694c087cb81d0820a364a53ea49ded0c7db0c1940f2e08f187ba8443fe"
-print(s.upper())
+s='BE48E3A6F383A57510D6E71DE41BD51CAE7A93F1F3109ACE48C461D4C28A7755AE762890EE861C647442AA0E358A099A0996607146B2FBEEFFFFFFFFFFFFFFFF85A0FC5A8D30D44A0F9EEC21098E22BCBCD99CB27A5B4615A45280002ED6737E13DFB5E26D213242D97D19DEDC51B5E97378352E123D69B0D77345A62FA53CA22C8DA9EA83201A549D0090DDBC64208D00000000000000004BB44E2D5A29D67CB1EA8F9251D735681D9B87A2519E29DB4CBF14557B5321214A79FFBE9602E1DF3EEA87C70944DB0228B54F65F66A2FCB45CA5991A1DE9A9291883DA916A0D837D06F89694C087CB81D0820A364A53EA49DED0C7DB0C1940F2E08F187BA8443FE'
+
+def row(i, last_row: str) -> bool:
+    b = ""
+    for c in last_row:
+        if '0' <= c <= '9':
+            x = ord(c) - ord('0')
+        else:
+            x = ord(c) - ord('A') + 10
+        # 4자리 2진수로 변환 후 이어붙임
+        b += f"{x:04b}"
+    return b[i] != '1'   # '1'이면 False, 아니면 True
+
+def val_to_char(v: int) -> str:
+    """0~9 → '0'-'9', 10~31 → 'A'-'V'"""
+    if v < 10:
+        return str(v)
+    return chr(ord('A') + v - 10)
+
+def char_to_val(c: str) -> int:
+    """'0'-'9' → 0~9, 'A'-'V' → 10~31"""
+    if '0' <= c <= '9':
+        return int(c)
+    return ord(c) - ord('A') + 10
+
+def dec_to_base32(n: int) -> str:
+    """10진수 → 32진수 문자열"""
+    if n == 0:
+        return "0"
+    res = ""
+    while n > 0:
+        res = val_to_char(n % 32) + res
+        n //= 32
+    return res
+
+def base32_to_dec(s: str) -> int:
+    """32진수 문자열 → 10진수"""
+    num = 0
+    for c in s:
+        num = num * 32 + char_to_val(c)
+    return num
+
+i=10
+print(row(i,s))
+print(dec_to_base32(int(s,16)))
