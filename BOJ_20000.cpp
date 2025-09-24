@@ -10,6 +10,7 @@ string l="5U93HQDSS3KLQH1LN73NI1NL8SLPT97SFJ22DCSI64C7AC52JNAMN7CA4GTQ31OP3K8AL0
 bool row(int i) {
     string b;
     for(char c:l) for(int j=4,x=(c>='0'&&c<='9'?c-'0':c-'A'+10); j>=0; j--) b+='0'+((x>>j)&1); 
+	b=b.substr(b.find('1'));
     return b[i]!='1';
 }
 void solve3(char b[1024][2048],int sx,int sy,char c,int len){
