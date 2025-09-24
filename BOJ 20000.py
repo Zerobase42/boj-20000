@@ -2,7 +2,7 @@ last_row=0xbe48e3a6f383a57510d6e71de41bd51cae7a93f1f3109ace48c461d4c28a7755ae762
 def solve3(sx,sy,c,l):
     global b
     if c=='/':rs,re=sx-1024,sx+1
-    else:rs=sx;re=re+1024-sy
+    else:rs=sx;re=rs+1024-sy
     stop=1
     for i in range(rs,re):
         if (last_row>>i)&1:stop=0
@@ -11,7 +11,7 @@ def solve3(sx,sy,c,l):
     if not l:l=1;rec=0
     dx=-1 if c=='/'else 1
     dy=1
-    for i in range(len):
+    for i in range(l):
         x=sx+dx*i;y=sy+dy*i
         if 0<=x<2048 and 0<=y<1024:b[y][x]=c
     if not rec:return
