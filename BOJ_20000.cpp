@@ -10,7 +10,8 @@ string l="BE48E3A6F383A57510D6E71DE41BD51CAE7A93F1F3109ACE48C461D4C28A7755AE7628
 bool row(int i) {
     string b;
     for(char c:l) for(int j=3,x=(c>='0'&&c<='9'?c-'0':c-'A'+10);j>=0;j--)b+='0'+((x>>j)&1); 
-    return b[i]!='1';
+    b=b.substr(b.find('1'));
+	return b[i]!='1';
 }
 void solve3(char b[1024][2048],int sx,int sy,char c,int len){
     int rs,re;
@@ -49,9 +50,7 @@ int main(){
 	}else if(n==2){
 		string p[]={"","BaBeBaBkBaBeBaB","jojojojnjojojoj","OnOlOnO","inieini","JuJ"},r="dgdedgd!dgdedgd";
     	for(int i=5;i>1;i--){
-        	string t;
-			for(char c:r)t+=p[i]+c;
-			r=t+p[i];
+        	string t;for(char c:r)t+=p[i]+c;r=t+p[i];
 		}
 		for(char c:r)cout<<p[1]<<c;
 		cout<<p[1];
